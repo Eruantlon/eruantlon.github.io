@@ -32,9 +32,9 @@ header p {
   display: flex;
   align-items: center;
   background-image: url('https://github.com/Eruantlon/eruantlon.github.io/blob/master/Images/Santiago1.jpg?raw=true');
-  backgroud-size: cover;
+  backgroud-size: contain;
   color: #ffffff;
-  height: 100%;
+  height: 500px;
   text-shadow: 0.25px 0.25px 0.25px #000000;
 }
 
