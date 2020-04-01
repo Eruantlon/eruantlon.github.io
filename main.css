@@ -34,6 +34,7 @@ header p {
   background-image: url('https://github.com/Eruantlon/eruantlon.github.io/blob/master/Images/Santiago1.jpg?raw=true');
   backgroud-size: auto 100%;
   color: #ffffff;
+  height: 100%;
   text-shadow: 0.25px 0.25px 0.25px #000000;
 }
 
