@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unasked Cosmos - Questions Never Asked Before</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            900: '#0B0D17',
+                            800: '#151932',
+                            700: '#1E2547',
+                            600: '#2A3561',
+                        },
+                        nebula: {
+                            400: '#818CF8',
+                            500: '#6366F1',
+                            600: '#4F46E5',
+                        },
+                        stardust: {
+                            300: '#FCD34D',
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'twinkle': 'twinkle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.3' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cosmic-900 text-gray-100 min-h-screen overflow-x-hidden">
+    <div id="starfield" class="fixed inset-0 pointer-events-none z-0"></div>
+    
+    <script src="components/navbar.js"></script>
+    <script src="components/question-card.js"></script>
+    <script src="components/footer.js"></script>
+    
+    <cosmic-navbar></cosmic-navbar>
+    
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cosmic-900/50 to-cosmic-900 pointer-events-none"></div>
+            
+            <div class="max-w-4xl mx-auto text-center relative">
+                <div class="mb-8 animate-float">
+                    <span class="text-6xl sm:text-8xl">❓</span>
+                </div>
+                
+                <h1 class="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-nebula-400 via-stardust-300 to-nebula-500 bg-clip-text text-transparent leading-tight">
+                    Questions Never Asked Before
+                </h1>
+                
+                <p class="text-xl sm:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Venture into the void of curiosity. Submit questions that have never crossed human lips, and explore the uncharted territories of human thought.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="scrollToGenerator()" class="group px-8 py-4 bg-nebula-600 hover:bg-nebula-500 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg shadow-nebula-600/30 hover:shadow-nebula-600/50">
+                        <i data-feather="sparkles" class="w-5 h-5"></i>
+                        Generate the Unasked
+                    </button>
+                    <button onclick="scrollToSubmit()" class="group px-8 py-4 bg-transparent border-2 border-stardust-400 hover:bg-stardust-400/10 rounded-full font-semibold transition-all duration-300 flex items-center gap-2">
+                        <i data-feather="edit-3" class="w-5 h-5"></i>
+                        Ask the Void
+                    </button>
+                </div>
+                
+                <div class="mt-16 flex justify-center gap-8 text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i data-feather="users" class="w-4 h-4"></i>
+                        <span id="visitor-count">0</span> Curious Souls
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-feather="message-circle" class="w-4 h-4"></i>
+                        <span id="question-count">0</span> Questions Submitted
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question Generator Section -->
+        <section id="generator" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-stardust-300">The Infinite Question Generator</h2>
+                    <p class="text-gray-400">Algorithmic combinations of concepts never before questioned</p>
+                </div>
+                
+                <div class="bg-cosmic-800/50 backdrop-blur-lg rounded-2xl p-8 sm:p-12 border border-cosmic-700 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-nebula-500 via-stardust-400 to-nebula-500"></div>
+                    
+                    <div id="generated-question" class="text-2xl sm:text-3xl font-light text-center mb-8 min-h-[120px] flex items-center justify-center text-gray-200 italic">
+                        "Click the button below to birth a new question into existence..."
+                    </div>
+                    
+                    <div class="flex justify-center gap-4">
+                        <button onclick="generateQuestion()" class="px-6 py-3 bg-nebula-600 hover:bg-nebula-500 rounded-lg font-medium transition-all duration-300 flex items-center gap-2">
+                            <i data-feather="refresh-cw" class="w-4 h-4"></i>
+                            Generate New
+                        </button>
+                        <button onclick="saveGeneratedQuestion()" class="px-6 py-3 bg-cosmic-700 hover:bg-cosmic-600 border border-cosmic-600 rounded-lg font-medium transition-all duration-300 flex items-center gap-2">
+                            <i data-feather="heart" class="w-4 h-4"></i>
+                            Save to Void
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Question Section -->
+        <section id="submit" class="py-24 px-4 sm:px-6 lg:px-8 bg-cosmic-800/30 relative">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-nebula-400">Submit to the Void</h2>
+                    <p class="text-gray-400">What question has never been asked? Make it real.</p>
+                </div>
+                
+                <form id="question-form" class="space-y-6 bg-cosmic-800/50 backdrop-blur p-8 rounded-2xl border border-cosmic-700">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Your Question</label>
+                        <textarea id="question-input" rows="3" class="w-full px-4 py-3 bg-cosmic-900 border border-cosmic-700 rounded-lg focus:ring-2 focus:ring-nebula-500 focus:border-transparent outline-none transition-all resize-none text-gray-100 placeholder-gray-600" placeholder="e.g., Do shadows dream of being light?"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Your Name (Optional)</label>
+                        <input type="text" id="name-input" class="w-full px-4 py-3 bg-cosmic-900 border border-cosmic-700 rounded-lg focus:ring-2 focus:ring-nebula-500 focus:border-transparent outline-none transition-all text-gray-100 placeholder-gray-600" placeholder="Anonymous Wanderer">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Category of Curiosity</label>
+                        <select id="category-input" class="w-full px-4 py-3 bg-cosmic-900 border border-cosmic-700 rounded-lg focus:ring-2 focus:ring-nebula-500 focus:border-transparent outline-none transition-all text-gray-100">
+                            <option value="cosmic">Cosmic & Existential</option>
+                            <option value="abstract">Abstract & Philosophical</option>
+                            <option value="nature">Nature & Organic</option>
+                            <option value="emotion">Emotions & Feelings</option>
+                            <option value="time">Time & Memory</option>
+                            <option value="other">Uncharted Territory</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-nebula-600 to-stardust-500 hover:from-nebula-500 hover:to-stardust-400 rounded-lg font-semibold text-white transition-all duration-300 transform hover:scale-[1.02] shadow-lg">
+                        Release into the Cosmos
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Community Questions Gallery -->
+        <section id="gallery" class="py-24 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-bold mb-2 text-stardust-300">The Collective Curiosity</h2>
+                        <p class="text-gray-400">Questions from fellow wanderers</p>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button onclick="filterQuestions('all')" class="filter-btn active px-4 py-2 rounded-full text-sm bg-nebula-600 text-white transition-all">All</button>
+                        <button onclick="filterQuestions('cosmic')" class="filter-btn px-4 py-2 rounded-full text-sm bg-cosmic-700 text-gray-300 hover:bg-cosmic-600 transition-all">Cosmic</button>
+                        <button onclick="filterQuestions('abstract')" class="filter-btn px-4 py-2 rounded-full text-sm bg-cosmic-700 text-gray-300 hover:bg-cosmic-600 transition-all">Abstract</button>
+                        <button onclick="filterQuestions('nature')" class="filter-btn px-4 py-2 rounded-full text-sm bg-cosmic-700 text-gray-300 hover:bg-cosmic-600 transition-all">Nature</button>
+                    </div>
+                </div>
+                
+                <div id="questions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Questions will be populated here -->
+                </div>
+                
+                <div id="empty-state" class="hidden text-center py-16">
+                    <i data-feather="inbox" class="w-16 h-16 text-cosmic-600 mx-auto mb-4"></i>
+                    <p class="text-gray-500 text-lg">The void is silent... Be the first to ask.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <cosmic-footer></cosmic-footer>
+
+    <script src="script.js"></script>
+    <script>feather.replace();</script>
+</body>
+</html>
