@@ -1,0 +1,117 @@
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B0D17;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2A3561;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6366F1;
+}
+
+/* Starfield animation */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+    opacity: var(--opacity);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: var(--opacity); transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(0.8); }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+    background: rgba(99, 102, 241, 0.3);
+    color: #FCD34D;
+}
+
+/* Glassmorphism enhancements */
+.glass {
+    background: rgba(21, 25, 50, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Question card hover effects */
+.question-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.3);
+}
+
+/* Gradient text animation */
+.gradient-text {
+    background-size: 200% auto;
+    animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Input focus effects */
+input:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Button press effect */
+button:active {
+    transform: scale(0.98);
+}
+
+/* Category badge colors */
+.badge-cosmic { background: rgba(99, 102, 241, 0.2); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.3); }
+.badge-abstract { background: rgba(251, 191, 36, 0.2); color: #FBBF24; border: 1px solid rgba(251, 191, 36, 0.3); }
+.badge-nature { background: rgba(52, 211, 153, 0.2); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3); }
+.badge-emotion { background: rgba(244, 114, 182, 0.2); color: #F472B6; border: 1px solid rgba(244, 114, 182, 0.3); }
+.badge-time { background: rgba(167, 139, 250, 0.2); color: #A78BFA; border: 1px solid rgba(167, 139, 250, 0.3); }
+.badge-other { background: rgba(156, 163, 175, 0.2); color: #9CA3AF; border: 1px solid rgba(156, 163, 175, 0.3); }
+
+/* Loading shimmer */
+.shimmer {
+    background: linear-gradient(90deg, #1E2547 25%, #2A3561 50%, #1E2547 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Floating animation variations */
+.float-delay-1 { animation-delay: 0s; }
+.float-delay-2 { animation-delay: 2s; }
+.float-delay-3 { animation-delay: 4s; }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+    .star {
+        display: none;
+    }
+    .star:nth-child(-n+20) {
+        display: block;
+    }
+}
